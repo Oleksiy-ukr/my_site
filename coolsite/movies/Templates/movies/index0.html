@@ -1,0 +1,18 @@
+{% extends 'movies/base.html' %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+<ul>
+    {% for p in posts %}
+    <li>
+        <h2>{{p.title}}</h2>
+        {% autoescape on %}
+        <p>{{p.content|linebreaks|truncatewords:300}}</p>
+        {% endautoescape %}
+        <div class="clear"></div>
+        <p class="link-read-post"><a href="{% url 'post' p.pk %}">Читати пост</a></p>
+        <hr>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

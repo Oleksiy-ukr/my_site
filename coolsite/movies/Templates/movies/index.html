@@ -1,0 +1,29 @@
+{% extends 'movies/base.html' %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+<ul>
+    {% for p in posts %}
+    <li>
+        <div class="article-panel">
+            <p class="first"> Категорія: {{p.cat}}</p>
+            <p class="last"> Дата: {{p.time_update|date:"d-m-Y H:i:s"}}</p>
+        </div>
+
+
+        <h2>{{p.title}}</h2>
+        {% if p.photo %}
+            <p><img class="img-article-left thumb" src="{{p.photo.url}}"></p>
+        {% endif %}
+
+
+        {% autoescape on %}
+        <p>{{p.content|linebreaks|truncatewords:150}}</p>
+        {% endautoescape %}
+        <div class="clear"></div>
+        <p class="link-read-post"><a href="{{ p.get_absolute_url }}">Читати пост</a></p>
+        <hr>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
